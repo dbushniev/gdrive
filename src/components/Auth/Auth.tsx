@@ -4,7 +4,6 @@ import { GoogleOutlined } from '@ant-design/icons';
 import Gdrive from '../../assets/grive_icon.svg';
 import styles from './Auth.module.css';
 
-
 interface Props {
   handleClick: () => void;
 }
