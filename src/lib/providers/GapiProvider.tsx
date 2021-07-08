@@ -19,7 +19,15 @@ const GapiProvider: React.FC = (props) => {
   const { children } = props;
 
   const gapi = useGoogleApi({
-    scopes: ['https://www.googleapis.com/auth/drive.metadata.readonly'] as never[],
+    scopes: [
+      'https://www.googleapis.com/auth/drive',
+      'https://www.googleapis.com/auth/drive.file',
+      'https://www.googleapis.com/auth/drive.readonly',
+      'https://www.googleapis.com/auth/drive.appdata',
+      'https://www.googleapis.com/auth/drive.metadata',
+      'https://www.googleapis.com/auth/drive.photos.readonly',
+      'https://www.googleapis.com/auth/drive.metadata.readonly'
+    ] as never[],
     discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'] as never[],
   });
 
