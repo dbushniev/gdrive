@@ -1,0 +1,24 @@
+.filters {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+.filters__search {
+    max-width: 500px;
+    width: 100%;
+    margin-right: 16px;
+}
+
+.filters__select {
+    width: 100px
+}
+
+.filters__button {
+    width: 50px;
+    vertical-align: unset;
+}
+
+.filters__button + .filters__button {
+    /*margin-left: 5px;*/
+}

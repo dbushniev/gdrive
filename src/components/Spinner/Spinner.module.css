@@ -1,0 +1,32 @@
+.spinner__container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.spinner__icon {
+    font-size: 1.5rem;
+}
+
+.spinner > span {
+    font-size: 50px;
+}
+
+.spinner > span > i {
+    height: 20px;
+    width: 20px;
+}
+
+._absolute {
+    position: absolute;
+}
+
+._blur {
+    background-color: rgba(250, 250, 250, 0.6);
+}

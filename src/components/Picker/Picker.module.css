@@ -1,0 +1,15 @@
+.picker {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 24px;
+    height: 800px;
+    width: calc(100% - 100px);
+    box-shadow: 0 4px 16px rgb(0 0 0 / 20%);
+}
+
+.picker__btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}

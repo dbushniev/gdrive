@@ -1,0 +1,34 @@
+.auth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth__imgContainer {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgb(0 0 0 / 20%);
+}
+
+.auth__img {
+    width: 100%;
+}
+
+.auth__title {
+    margin: 20px 0;
+    color: #444;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.auth__subtitle {
+    color: #929292;
+    line-height: 20px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.auth__btn {
+    margin: 20px 0;
+}
