@@ -48,7 +48,7 @@ const Picker: React.FC<Props> = (props) => {
 
 
   if (!isSignIn) return (
-    <div className={styles.picker}>
+    <div className={`${styles.picker} ${styles._align}`}>
       <Auth handleClick={handleAuthClick} />
     </div>
   )

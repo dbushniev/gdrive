@@ -1,7 +1,6 @@
 .picker {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding-bottom: 24px;
     height: 800px;
     width: calc(100% - 100px);
@@ -12,4 +11,8 @@
     display: flex;
     justify-content: center;
     margin-top: 10px;
+}
+
+._align {
+    justify-content: center;
 }
