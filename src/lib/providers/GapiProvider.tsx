@@ -33,8 +33,12 @@ const GapiProvider: React.FC = (props) => {
 
   const isSignIn = useMemo(() => !!gapi?.auth2.getAuthInstance().isSignedIn.get(), [!!gapi?.auth2.getAuthInstance().isSignedIn.get()]);
 
+
   useEffect(() => {
-    if (gapi) gapi.client.setApiKey(process.env.REACT_APP_GDRIVE_API_KEY);
+    if (gapi) {
+      gapi.client.setApiKey(process.env.REACT_APP_GDRIVE_API_KEY);
+      // setUserId(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId())
+    }
   }, [gapi]);
 
   return (
