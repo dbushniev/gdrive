@@ -48,11 +48,11 @@ const useFiles = (query: DocumentQuery) => {
   const handleDownloadFile = async (fileId: Key) => {
     try {
       setIsLoading(true);
-      const file = await gapi?.client.drive.files.get({
+      const file: { body: string } = await gapi?.client.drive.files.get({
         fileId,
-        alt: 'media'
+        alt: 'media',
       });
-      console.log(file, 'FILE')
+      return file.body;
     } catch (e) {
       console.log(e);
     } finally {

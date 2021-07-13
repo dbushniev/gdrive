@@ -7,7 +7,7 @@ import GapiProvider from './lib/providers/GapiProvider';
 
 function App() {
   return (
-    <GoogleApiProvider clientId={process.env.REACT_APP_CLIENT_ID || ''}>
+    <GoogleApiProvider clientId={process.env.REACT_APP_GDRIVE_CLIENT_ID || ''}>
       <GapiProvider>
         <Picker />
       </GapiProvider>

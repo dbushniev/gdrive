@@ -7,17 +7,21 @@ import { Document } from '../../lib/models/Document/Document';
 import { Key } from 'react';
 import { Layout } from '../../config/layout';
 import PdfIcon from '../../assets/pdf_icon.png';
+import { S3File } from '../../lib/models/S3File/S3File';
+import getFileInfo from '../../lib/utils/getFileInfo';
 
 interface Props {
   list: Document[];
+  s3Files: S3File[];
   layout: keyof typeof Layout;
-  handleFileClick: (id: Key) => void;
+  handleFileClick: (id: Key, name: string) => void;
   isLoading?: boolean
 }
 
 const ListComponent: React.FC<Props> = (props) => {
   const {
     list,
+    s3Files,
     layout,
     handleFileClick,
     isLoading = false
@@ -38,7 +42,9 @@ const ListComponent: React.FC<Props> = (props) => {
           key={item.id}
           className={classNames(styles.item, {[styles.horizontal__item]: isHorizontal})}
         >
-          <CloudDownloadOutlined className={styles.item__icon} onClick={() => handleFileClick(item.id)}/>
+          {!s3Files.find((s3File) => getFileInfo(s3File.Key).name === getFileInfo(item.name).name) && (
+            <CloudDownloadOutlined className={styles.item__icon} onClick={() => handleFileClick(item.id, item.name)}/>
+          )}
           <div className={classNames(styles.item_imgContainer, {[styles.horizontal__imgContainer]: isHorizontal})}>
             <img
               className={classNames(styles.item__img, {[styles.horizontal__img]: isHorizontal})}
