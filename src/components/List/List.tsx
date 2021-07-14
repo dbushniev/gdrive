@@ -10,6 +10,7 @@ import PdfIcon from '../../assets/pdf_icon.png';
 import { S3File } from '../../lib/models/S3File/S3File';
 import getFileInfo from '../../lib/utils/getFileInfo';
 import scrollControl from '../../lib/utils/scrollControl';
+import audioClick from '../../lib/utils/audioClick';
 
 interface Props {
   list: Document[];
@@ -55,7 +56,7 @@ const ListComponent: React.FC<Props> = (props) => {
             className={classNames(styles.item, {[styles.horizontal__item]: isHorizontal})}
           >
             {!s3Files.find((s3File) => getFileInfo(s3File.Key).name === getFileInfo(item.name).name) && (
-              <CloudDownloadOutlined className={styles.item__icon} onClick={() => handleFileClick(item.id, item.name)}/>
+              <CloudDownloadOutlined className={styles.item__icon} onClick={audioClick(() => handleFileClick(item.id, item.name))}/>
             )}
             <div className={classNames(styles.item_imgContainer, {[styles.horizontal__imgContainer]: isHorizontal})}>
               <img
