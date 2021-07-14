@@ -10,6 +10,18 @@
     margin-right: 16px;
 }
 
+.filters__icon {
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 12px;
+    vertical-align: -1px;
+    transition: color 0.3s;
+}
+
+.filters__icon:hover {
+    color: rgba(0, 0, 0, 0.45);
+}
+
+
 .filters__select {
     width: 100px
 }
@@ -19,6 +31,6 @@
     vertical-align: unset;
 }
 
-.filters__button + .filters__button {
-    /*margin-left: 5px;*/
+._hidden {
+    display: none;
 }

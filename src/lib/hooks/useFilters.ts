@@ -10,6 +10,7 @@ const useFilters = (params: DocumentQuery, handleChangeParams: IHandleChangeFn<D
 
   const handlePressEnter = () => handleChangeParams({ search: input });
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => setInput(e.target.value);
+  const handleClearInput = () => setInput('');
 
   const handleChangeOrderBy = ({ key: orderBy }: { key: string }) => handleChangeParams({ orderBy })
   const handleChangeOrder = () => handleChangeParams({ order: params.order === ORDER.ASC ? ORDER.DESC : ORDER.ASC })
@@ -24,6 +25,7 @@ const useFilters = (params: DocumentQuery, handleChangeParams: IHandleChangeFn<D
     input,
     handlePressEnter,
     handleChangeInput,
+    handleClearInput,
     handleChangeOrderBy,
     handleChangeOrder,
     orderByList,
