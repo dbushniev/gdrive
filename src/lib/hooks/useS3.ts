@@ -1,21 +1,30 @@
 import ReactS3Client from 'react-aws-s3-typescript';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { S3File } from '../models/S3File/S3File';
 import {
   ListFileErrorResponse, ListFileResponse,
 } from 'react-aws-s3-typescript/dist/types';
+import { useGapiContext } from '../providers/GapiProvider';
 
-const s3Config = {
-  bucketName:  process.env.REACT_APP_S3_BUCKET_NAME || '',
-  region: process.env.REACT_APP_S3_REGION || '',
-  accessKeyId: process.env.REACT_APP_S3_ACESS_KEY || '',
-  secretAccessKey: process.env.REACT_APP_S3_SECRET_KEY || '',
-  s3Url: process.env.REACT_APP_S3_URL || ''
-}
+
 
 const useS3 = () => {
   const [s3Files, setS3files] = useState<S3File[]>([]);
   const [isS3FilesLoading, seIisS3FilesLoading] = useState<boolean>(false);
+
+  const {
+    gapi,
+    isSignIn,
+  } = useGapiContext();
+
+  const s3Config = useMemo(() => ({
+    bucketName:  process.env.REACT_APP_S3_BUCKET_NAME || '',
+    region: process.env.REACT_APP_S3_REGION || '',
+    accessKeyId: process.env.REACT_APP_S3_ACESS_KEY || '',
+    secretAccessKey: process.env.REACT_APP_S3_SECRET_KEY || '',
+    s3Url: process.env.REACT_APP_S3_URL || '',
+    ...(gapi && isSignIn && { dirName: gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId() }),
+  }), [isSignIn, gapi]);
 
   useEffect(() => {
     listS3Files();

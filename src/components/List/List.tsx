@@ -11,6 +11,7 @@ import { S3File } from '../../lib/models/S3File/S3File';
 import getFileInfo from '../../lib/utils/getFileInfo';
 import scrollControl from '../../lib/utils/scrollControl';
 import audioClick from '../../lib/utils/audioClick';
+import { useGapiContext } from '../../lib/providers/GapiProvider';
 
 interface Props {
   list: Document[];
@@ -29,6 +30,10 @@ const ListComponent: React.FC<Props> = (props) => {
     isLoading = false,
   } = props;
 
+  const {
+    gapi,
+    isSignIn,
+  } = useGapiContext();
 
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -55,7 +60,10 @@ const ListComponent: React.FC<Props> = (props) => {
             key={item.id}
             className={classNames(styles.item, {[styles.horizontal__item]: isHorizontal})}
           >
-            {!s3Files.find((s3File) => getFileInfo(s3File.Key).name === getFileInfo(item.name).name) && (
+            {gapi && isSignIn && !s3Files.find((s3File) => {
+              // const
+              return getFileInfo(s3File.Key).name.includes(getFileInfo(item.name).name)
+            }) && (
               <CloudDownloadOutlined className={styles.item__icon} onClick={audioClick(() => handleFileClick(item.id, item.name))}/>
             )}
             <div className={classNames(styles.item_imgContainer, {[styles.horizontal__imgContainer]: isHorizontal})}>

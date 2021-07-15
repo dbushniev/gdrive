@@ -35,10 +35,7 @@ const GapiProvider: React.FC = (props) => {
 
 
   useEffect(() => {
-    if (gapi) {
-      gapi.client.setApiKey(process.env.REACT_APP_GDRIVE_API_KEY);
-      // setUserId(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId())
-    }
+    if (gapi) gapi.client.setApiKey(process.env.REACT_APP_GDRIVE_API_KEY);
   }, [gapi]);
 
   return (
