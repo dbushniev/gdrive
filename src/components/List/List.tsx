@@ -7,15 +7,11 @@ import { Document } from '../../lib/models/Document/Document';
 import { Key } from 'react';
 import { Layout } from '../../config/layout';
 import PdfIcon from '../../assets/pdf_icon.png';
-import { S3File } from '../../lib/models/S3File/S3File';
-import getFileInfo from '../../lib/utils/getFileInfo';
 import scrollControl from '../../lib/utils/scrollControl';
 import audioClick from '../../lib/utils/audioClick';
-import { useGapiContext } from '../../lib/providers/GapiProvider';
 
 interface Props {
   list: Document[];
-  s3Files: S3File[];
   layout: keyof typeof Layout;
   handleFileClick: (id: Key, name: string) => void;
   isLoading?: boolean
@@ -24,16 +20,10 @@ interface Props {
 const ListComponent: React.FC<Props> = (props) => {
   const {
     list,
-    s3Files,
     layout,
     handleFileClick,
     isLoading = false,
   } = props;
-
-  const {
-    gapi,
-    isSignIn,
-  } = useGapiContext();
 
   const listRef = useRef<HTMLDivElement>(null);
 

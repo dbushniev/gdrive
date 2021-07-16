@@ -124,7 +124,6 @@ const Picker: React.FC<Props> = (props) => {
       />
       <ListComponent
         list={files}
-        s3Files={s3Files}
         layout={layout}
         handleFileClick={showUploadModal}
       />
