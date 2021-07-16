@@ -28,7 +28,7 @@ const useFiles = (query: DocumentQuery) => {
       setIsLoading(true);
       const res: { result: DocumentResponse } = await gapi?.client.drive.files.list({
         pageSize: query.pageSize,
-        q: `name contains '${query.search}' and mimeType='application/pdf'`,
+        q: `name contains '${query.search}' and mimeType='application/pdf' and trashed=false and visibility='limited' and 'me' in owners`,
         fields: "nextPageToken, files(id, name, thumbnailLink)",
         pageToken,
         ...(query.orderBy && { orderBy: `${query.orderBy} ${query.order === ORDER.ASC ? '' : ORDER.DESC}` }),

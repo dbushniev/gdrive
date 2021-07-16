@@ -60,12 +60,7 @@ const ListComponent: React.FC<Props> = (props) => {
             key={item.id}
             className={classNames(styles.item, {[styles.horizontal__item]: isHorizontal})}
           >
-            {gapi && isSignIn && !s3Files.find((s3File) => {
-              // const
-              return getFileInfo(s3File.Key).name.includes(getFileInfo(item.name).name)
-            }) && (
-              <CloudDownloadOutlined className={styles.item__icon} onClick={audioClick(() => handleFileClick(item.id, item.name))}/>
-            )}
+            <CloudDownloadOutlined className={styles.item__icon} onClick={audioClick(() => handleFileClick(item.id, item.name))}/>
             <div className={classNames(styles.item_imgContainer, {[styles.horizontal__imgContainer]: isHorizontal})}>
               <img
                 className={classNames(styles.item__img, {[styles.horizontal__img]: isHorizontal})}
