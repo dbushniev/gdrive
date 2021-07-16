@@ -17,6 +17,7 @@ import useS3 from '../../lib/hooks/useS3';
 import fileConvert from '../../lib/utils/fileConvert';
 import GTextLogo from '../../assets/gdrive_text_icon.svg';
 import getFileInfo from '../../lib/utils/getFileInfo';
+import { uuid } from 'uuidv4';
 
 const { confirm, info } = Modal;
 const { Title } = Typography;
@@ -59,7 +60,7 @@ const Picker: React.FC<Props> = (props) => {
   const inputRef = useRef<Input>(null);
 
   const showUploadModal = (fileId: Key, fileName: string) => {
-    const isFileUpload = s3Files.find((s3File) => getFileInfo(s3File.Key).name === `${guid}/${fileName}`);
+    const isFileUpload = s3Files.find((s3File) => getFileInfo(s3File.Key).name === `${guid}/${getFileInfo(fileName).name}`);
     return confirm({
       title: isFileUpload
         ? 'File with this name has already download, if tou want to upload this file, please input another file name'
@@ -89,13 +90,14 @@ const Picker: React.FC<Props> = (props) => {
   const handleAuthClick = async () => gapi?.auth2.getAuthInstance().signIn();
   const handleSignOutClick = async () => gapi?.auth2.getAuthInstance().signOut();
   const handleChangeLayout = () => setLayout((layout) => layout === Layout.horizontal ? Layout.vertical : Layout.horizontal);
-  const handleDownload = async (fileId: Key, fileName: string) => {
+  const handleDownload = async (fileId: Key, fileName?: string) => {
+    const _fileName = fileName || uuid();
     try {
       const byteString = await handleDownloadFile(fileId);
       if (byteString) {
-        const { file, name } = fileConvert(byteString, fileName);
+        const { file, name } = fileConvert(byteString, _fileName);
         await uploadS3File(file, name);
-        showConfirmModal(fileName);
+        showConfirmModal(_fileName);
       }
     } catch (e) {
       console.log(e);

@@ -29,7 +29,6 @@ const useS3 = () => {
     ...(gapi && isSignIn && { dirName: gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId() }),
   }), [isSignIn, gapi]);
 
-
   useEffect(() => {
     guid && listS3Files(guid);
   }, [guid])
