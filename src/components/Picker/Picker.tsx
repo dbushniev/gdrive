@@ -17,7 +17,7 @@ import useS3 from '../../lib/hooks/useS3';
 import fileConvert from '../../lib/utils/fileConvert';
 import GTextLogo from '../../assets/gdrive_text_icon.svg';
 import getFileInfo from '../../lib/utils/getFileInfo';
-import { uuid } from 'uuidv4';
+import setFileName from '../../lib/utils/setFileName';
 
 const { confirm, info } = Modal;
 const { Title } = Typography;
@@ -71,7 +71,7 @@ const Picker: React.FC<Props> = (props) => {
         <div>If you click "OK" button this file will be upload to your s3 bucket</div>
       </div>,
       centered: true,
-      onOk: () => handleDownload(fileId, isFileUpload ? inputRef.current?.state.value : fileName),
+      onOk: () => handleDownload(fileId, inputRef.current?.state.value || fileName),
     })
   };
 
@@ -90,8 +90,8 @@ const Picker: React.FC<Props> = (props) => {
   const handleAuthClick = async () => gapi?.auth2.getAuthInstance().signIn();
   const handleSignOutClick = async () => gapi?.auth2.getAuthInstance().signOut();
   const handleChangeLayout = () => setLayout((layout) => layout === Layout.horizontal ? Layout.vertical : Layout.horizontal);
-  const handleDownload = async (fileId: Key, fileName?: string) => {
-    const _fileName = fileName || uuid();
+  const handleDownload = async (fileId: Key, fileName: string) => {
+    const _fileName = setFileName(s3Files, fileName);
     try {
       const byteString = await handleDownloadFile(fileId);
       if (byteString) {
